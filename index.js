@@ -42,13 +42,14 @@ async function echoReadable(readable) {
 
             const currentThrottle = 100 - parseInt(match[1]);
 
-            if (-1 === maxThrottle && currentThrottle > maxThrottle) {
+            if (-1 === maxThrottle || currentThrottle > maxThrottle) {
                 maxThrottle = currentThrottle;
             }
 
-            mb.tray.setTitle(
-                sprintf('current %d%%, max %d%%', currentThrottle, maxThrottle)
-            );
+            const title = sprintf('current %d%%, max %d%%', currentThrottle, maxThrottle);
+
+            mb.tray.setTitle(title);
+            console.log(title);
         }
     }
 }
